@@ -21,6 +21,7 @@ dotenv.config()
 
 app.register(cors, {
   origin: ['http://localhost:3000', 'https://sorteio.ioiolanches.com.br'],
+  credentials: true,
 })
 
 /* ======================== SWAGGER CONFIG ======================== */
@@ -34,6 +35,15 @@ app.register(fastifySwagger, {
       title: 'Ioio lanches API',
       description: 'Ioio lanches API',
       version: '1.0.0',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
     },
   },
   transform: jsonSchemaTransform,

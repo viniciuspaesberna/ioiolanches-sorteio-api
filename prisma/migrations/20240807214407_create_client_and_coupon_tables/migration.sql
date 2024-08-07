@@ -10,17 +10,17 @@ CREATE TABLE "clients" (
 -- CreateTable
 CREATE TABLE "coupons" (
     "id" TEXT NOT NULL,
-    "value" TEXT NOT NULL,
-    "client_id" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
     "redeemed" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "client_id" TEXT,
 
     CONSTRAINT "coupons_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "coupons_value_key" ON "coupons"("value");
+CREATE UNIQUE INDEX "coupons_code_key" ON "coupons"("code");
 
 -- AddForeignKey
-ALTER TABLE "coupons" ADD CONSTRAINT "coupons_client_id_fkey" FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "coupons" ADD CONSTRAINT "coupons_client_id_fkey" FOREIGN KEY ("client_id") REFERENCES "clients"("id") ON DELETE SET NULL ON UPDATE CASCADE;

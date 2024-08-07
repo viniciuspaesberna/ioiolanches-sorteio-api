@@ -16,20 +16,22 @@ export const getRedeemedCoupons = async (app: FastifyInstance) => {
             coupons: z.array(
               z.object({
                 id: z.string().uuid(),
-                value: z.string(),
-                clientId: z.string().uuid(),
+                code: z.string(),
                 redeemed: z.boolean(),
                 createdAt: z.date(),
                 updatedAt: z.date(),
-                client: z.object({
-                  id: z.string().uuid(),
-                  name: z.string(),
-                  phone: z.string(),
-                }),
+                client: z
+                  .object({
+                    id: z.string().uuid(),
+                    name: z.string(),
+                    phone: z.string(),
+                  })
+                  .nullable(),
               }),
             ),
           }),
         },
+        security: [{ bearerAuth: [] }],
       },
     },
     async () => {

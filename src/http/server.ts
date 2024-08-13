@@ -20,12 +20,7 @@ const app = fastify()
 dotenv.config()
 
 app.register(cors, {
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'http://localhost:1212',
-    'https://sorteio.ioiolanches.com.br',
-  ],
+  origin: ['https://sorteio.ioiolanches.com.br'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

@@ -9,16 +9,12 @@ export async function generateCouponCode(length = 6): Promise<string> {
     result += characters[randomIndex]
   }
 
-  console.log('generated code', result)
-
   try {
     const existingCoupon = await prisma.coupon.findUnique({
       where: {
         code: result,
       },
     })
-
-    console.log('existing coupon', existingCoupon)
 
     if (existingCoupon) {
       console.log('coupon already exists', result)

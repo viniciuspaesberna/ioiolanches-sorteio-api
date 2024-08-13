@@ -17,6 +17,9 @@ const app = fastify()
 
 /* ======================== CONFIGURATION ======================== */
 
+const port = Number(process.env.PORT) || 3333
+const apiBaseUrl = process.env.API_BASE_URL || 'http://localhost:3333'
+
 dotenv.config()
 
 app.register(cors, {
@@ -76,10 +79,15 @@ app.setErrorHandler(errorHandler)
 
 app.register(router)
 
-/* ======================== SERVER START ======================== */
+app.get('/', async (request, reply) => {
+  reply.send({
+    message: 'Ioio lanches API',
+    version: '1.0.0',
+    documentation: `${apiBaseUrl}/docs`,
+  })
+})
 
-const port = Number(process.env.PORT) || 3333
-const apiBaseUrl = process.env.API_BASE_URL || 'http://localhost:3333'
+/* ======================== SERVER START ======================== */
 
 app.listen({ port }, () => {
   console.log(`Servidor do sorteio está rodando, ${apiBaseUrl}/docs`)

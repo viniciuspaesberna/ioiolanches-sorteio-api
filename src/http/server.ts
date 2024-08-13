@@ -23,7 +23,7 @@ const apiBaseUrl = process.env.API_BASE_URL || 'http://localhost:3333'
 dotenv.config()
 
 app.register(cors, {
-  origin: ['https://sorteio.ioiolanches.com.br'],
+  origin: ['*', 'https://sorteio.ioiolanches.com.br'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

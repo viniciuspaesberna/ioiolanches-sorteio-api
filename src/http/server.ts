@@ -95,7 +95,7 @@ app.setErrorHandler(errorHandler)
 
 app.register(router)
 
-app.get('/', async (request, reply) => {
+app.get('/hello', async (request, reply) => {
   reply.send({
     application: 'Ioio lanches API',
     version: '1.0.0',

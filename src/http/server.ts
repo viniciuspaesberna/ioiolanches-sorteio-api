@@ -88,6 +88,13 @@ app.get('/', async (request, reply) => {
 
 /* ======================== SERVER START ======================== */
 
-app.listen({ port }, () => {
-  console.log(`Servidor do sorteio está rodando, ${apiBaseUrl}/docs`)
-})
+if (process.env.NODE_ENV !== 'production') {
+  app.listen({ port }, () => {
+    console.log(`Servidor do sorteio está rodando, ${apiBaseUrl}/docs`)
+  })
+}
+
+export default async (req: unknown, res: unknown) => {
+  await app.ready()
+  app.server.emit('request', req, res)
+}

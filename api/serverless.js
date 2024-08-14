@@ -10,7 +10,7 @@ const app = Fastify({
 })
 
 // Register your application as a normal plugin.
-app.register(import('../dist/http/server'))
+app.register(import('../src/http/server'))
 
 export default async (req, res) => {
   await app.ready()

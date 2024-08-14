@@ -13,6 +13,20 @@ import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes'
 import { errorHandler } from './error-handler'
 import { router } from './router'
 
+// async function app(
+//   instance: FastifyInstance,
+//   opts: FastifyServerOptions,
+//   done,
+// ) {
+//   instance.get('/', async (req: FastifyRequest, res: FastifyReply) => {
+//     res.status(200).send({
+//       hello: 'World',
+//     })
+//   })
+//   instance.register(routes, { prefix: '/api/v1' })
+//   done()
+// }
+
 const app = fastify()
 
 /* ======================== CONFIGURATION ======================== */
@@ -83,7 +97,7 @@ app.register(router)
 
 app.get('/', async (request, reply) => {
   reply.send({
-    message: 'Ioio lanches API',
+    application: 'Ioio lanches API',
     version: '1.0.0',
     documentation: `${apiBaseUrl}/docs`,
   })
@@ -97,7 +111,4 @@ if (process.env.NODE_ENV !== 'production') {
   })
 }
 
-export default async (req: unknown, res: unknown) => {
-  await app.ready()
-  app.server.emit('request', req, res)
-}
+export default app

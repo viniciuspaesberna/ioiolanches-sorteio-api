@@ -1,18 +1,16 @@
-'use strict'
-
-// Read the .env file.
 import * as dotenv from 'dotenv'
 // Require the framework
 import Fastify from 'fastify'
+
 dotenv.config()
 
 // Instantiate Fastify with some config
 const app = Fastify({
-  logger: true,
+  logger: false,
 })
 
 // Register your application as a normal plugin.
-app.register(import('../dist/http/router.js'))
+app.register(import('../dist/http/server'))
 
 export default async (req, res) => {
   await app.ready()

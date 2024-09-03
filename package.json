@@ -4,8 +4,9 @@
   "main": "dist/http/server.js",
   "scripts": {
     "dev": "tsx watch --env-file .env src/http/server.ts",
-    "start": "node .",
-    "build": "tsup src/**/*.ts"
+    "start": "npm run build && node .",
+    "build": "tsup src/**/*.ts",
+    "db:migrate": "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",

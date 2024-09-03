@@ -13,20 +13,6 @@ import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes'
 import { errorHandler } from './error-handler'
 import { router } from './router'
 
-// async function app(
-//   instance: FastifyInstance,
-//   opts: FastifyServerOptions,
-//   done,
-// ) {
-//   instance.get('/', async (req: FastifyRequest, res: FastifyReply) => {
-//     res.status(200).send({
-//       hello: 'World',
-//     })
-//   })
-//   instance.register(routes, { prefix: '/api/v1' })
-//   done()
-// }
-
 const app = fastify()
 
 /* ======================== CONFIGURATION ======================== */
@@ -39,7 +25,7 @@ dotenv.config()
 app.register(cors, {
   origin: [
     'https://sorteio.ioiolanches.com.br',
-    'https://ioiolanches-sorteio-api.vercel.app',
+    'https://ioiolanches-sorteio-web.vercel.app',
   ],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -105,10 +91,6 @@ app.get('/hello', async (request, reply) => {
 
 /* ======================== SERVER START ======================== */
 
-if (process.env.NODE_ENV !== 'production') {
-  app.listen({ port }, () => {
-    console.log(`Servidor do sorteio está rodando, ${apiBaseUrl}/docs`)
-  })
-}
-
-module.exports = app
+app.listen({ port }, () => {
+  console.log(`Servidor do sorteio está rodando, ${apiBaseUrl}/docs`)
+})

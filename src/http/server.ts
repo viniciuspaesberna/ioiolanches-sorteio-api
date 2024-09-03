@@ -17,8 +17,8 @@ const app = fastify()
 
 /* ======================== CONFIGURATION ======================== */
 
+const host = process.env.HOST || 'http://localhost'
 const port = Number(process.env.PORT) || 3333
-const apiBaseUrl = process.env.API_BASE_URL || 'http://localhost:3333'
 
 dotenv.config()
 
@@ -81,16 +81,16 @@ app.setErrorHandler(errorHandler)
 
 app.register(router)
 
-app.get('/hello', async (request, reply) => {
+app.get('/', async (request, reply) => {
   reply.send({
     application: 'Ioio lanches API',
     version: '1.0.0',
-    documentation: `${apiBaseUrl}/docs`,
+    documentation: `${host}:${port}/docs`,
   })
 })
 
 /* ======================== SERVER START ======================== */
 
 app.listen({ port }, () => {
-  console.log(`Servidor do sorteio está rodando, ${apiBaseUrl}/docs`)
+  console.log(`Servidor do sorteio está rodando, ${host}:${port}/docs`)
 })
